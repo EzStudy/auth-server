@@ -7,3 +7,9 @@
 ----
 ### 코딩 방법
 - 돌아가면서 30분씩 코딩(페어프로그래밍)
+
+---
+#### 220606 
+1. Spring Security 5.7.1에서 더이상 WebSecurityConfigurerAdapater 지원 안함... -> 해결 방안 찾기
+2. JWT Filter(Custom Filter) 적용 방법 찾기
+3. JWT, Spring Security 동작 원리 이해
