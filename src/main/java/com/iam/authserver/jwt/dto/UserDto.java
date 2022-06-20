@@ -1,9 +1,10 @@
-package com.iam.authserver.jwt.model;
+package com.iam.authserver.jwt.dto;
 
 import lombok.Data;
 
 @Data
-public class LoginRequestDto {
+public class UserDto {
     private String userId;
     private String password;
+    private String email;
 }

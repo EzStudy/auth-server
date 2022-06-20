@@ -1,11 +1,12 @@
 package com.iam.authserver.jwt.config.auth;
 
-import com.iam.authserver.jwt.model.User;
-import java.util.ArrayList;
-import java.util.Collection;
+import com.iam.authserver.jwt.entity.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
 * Spring Secuity가 /login.do 요청이 들어오면

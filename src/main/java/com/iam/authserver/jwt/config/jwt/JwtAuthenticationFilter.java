@@ -4,13 +4,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.iam.authserver.jwt.config.auth.PrincipalDetails;
-import com.iam.authserver.jwt.model.LoginRequestDto;
-import java.io.IOException;
-import java.util.Date;
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import com.iam.authserver.jwt.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +13,13 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.Date;
 
 /**
  * UsernamePasswordAuthenticationFilter는 아이디 패스워드 기반의 인증을 담당하고 있는 필터입니다. 기본적으로 spring Security에서 이러한
@@ -42,18 +43,18 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         // request에 있는 username과 password를 파싱해서 자바 Object로 받기
         ObjectMapper om = new ObjectMapper();
-        LoginRequestDto loginRequestDto = null;
+        UserDto userDto = null;
         try {
-            loginRequestDto = om.readValue(request.getInputStream(), LoginRequestDto.class);
+            userDto = om.readValue(request.getInputStream(), UserDto.class);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        logger.debug("JwtAuthenticationFilter :: {}", loginRequestDto);
+        logger.debug("JwtAuthenticationFilter :: {}", userDto);
 
         // 유저네임패스워드 토큰 생성
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-            loginRequestDto.getUserId(), loginRequestDto.getPassword());
+            userDto.getUserId(), userDto.getPassword());
 
         logger.debug("JwtAuthenticationFilter : 토큰생성완료");
 
